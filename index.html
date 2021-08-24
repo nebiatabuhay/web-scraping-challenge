@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        h1 {text-align: left;}
+        div {font-family: 'Times New Roman';}
+        h2 {font-weight: bold; color:darkblue;}
+        .responsive {width: 100%; height: auto;}
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <title> Mission to Mars - Web Scraping & Mongo DB</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"  crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="jumbotron text-left" style= "background: url('https://www.enjpg.com/img/2020/outer-space-background-8.jpg');
+    background-size: cover; color: burlywood">
+        <h1 class="display-4"><strong>Mission to Mars</strong></h1>
+        <a class="btn btn-success btn-lg " href="/scrape" role="button" style= "font-family: 'Times New Roman'; font-weight: bold;"> Start Scraping New Mars Data</a>
+      </div> 
+
+<!-- Mars Latest News title, description and featured image -->
+<blockquote class="blockquote left-right card shadow shadow px-5 py-5">   
+    <div class=row>
+        <div class = "col-md-4">
+            <h2>Latest Mars News</h2>
+            <hr>
+            <h3>{{ planet_mars.news_title }}</h3>
+            <p>{{ planet_mars.news_paragraph }}</p>
+        </div>
+    
+        <div class = "col-md-4">
+            <h2>Featured Mars Image</h2>
+            <hr>
+                <img src = "{{ planet_mars.image }}" class=responsive style="border: burlywood 5px solid" />
+        </div>
+
+        <div class="col-md-4">
+            <h2>Mars Facts</h2>   
+            <hr>
+            <p>{{ planet_mars.facts | safe }}</p>
+        </div>
+    </div>
+</blockquote>
+
+
+<blockquote class="blockquote left-right card shadow shadow px-3 py-3">
+
+    <section id="gallery" >
+        <div class="container">
+            <h2 class="text-center">Mars Hemispheres</h2>
+            <hr>
+            <div class="row car-deck ">
+                {% for hemisphere in planet_mars.hemis %}
+                <div class="col-sm-12 col-lg-6 mb-6">
+                    <div class="card" >
+                        <img class="card-img-top" src="{{ hemisphere.img_url }}" style="border: burlywood 5px solid"/>
+                        <div class="card-body" style= "background-color: burlywood;">
+                            <p class="card-title text-center ">{{ hemisphere.title }}</p>
+                        </div>
+                    </div>   
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</blockquote>
+
+</body>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</html>
